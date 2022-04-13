@@ -15,7 +15,7 @@ extern "C" {
 
 class RawLogger : public VideoEncoder {
  public:
-  RawLogger(const char* filename, int width, int height, int fps,
+  RawLogger(const char* filename, CameraType type, int width, int height, int fps,
             int bitrate, bool h265, bool downscale, bool write = true);
   ~RawLogger();
   int encode_frame(const uint8_t *y_ptr, const uint8_t *u_ptr, const uint8_t *v_ptr,
@@ -32,7 +32,7 @@ private:
 
   std::string vid_path, lock_path;
 
-  AVCodec *codec = NULL;
+  const AVCodec *codec = NULL;
   AVCodecContext *codec_ctx = NULL;
 
   AVStream *stream = NULL;
